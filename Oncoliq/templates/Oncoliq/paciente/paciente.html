@@ -1,0 +1,32 @@
+<div>
+    {% extends "Oncoliq/inicio.html" %}
+    {% load static %}
+    
+        {% block contenidoQueCambia %}
+        <p>Pacientes disponibles</p>
+        <table id="tableInfoPaciente" class="table table-bordered text-center">
+            <tr id="tituloTablaPaciente">
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Email</th>
+            </tr>
+                {% for paciente in Paciente %}
+                    <tr>
+                        <td>{{paciente.nombre}}</td>
+                        <td>{{paciente.apellido}}</td>
+                        <td>{{paciente.email}}</td>
+                        <td><button class="btn btn-danger btnEliminar"><a href="{% url 'eliminarPaciente' paciente.nombre %}">X</a></button></td>
+                        <td><button class="btn btneditar"><a href="{% url 'editarPaciente' paciente.nombre %}">Editar</a></button><td>
+                    </tr>
+                {% endfor %}
+        </table>
+        <div class="formSetPaciente">
+            {% block setPaciente %}
+            {% endblock %}      
+        </div>
+        <div class="formGetPaciente">
+            {% block getPaciente %}
+            {% endblock %}      
+        </div>
+        {% endblock %}
+</div>

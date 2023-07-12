@@ -1,0 +1,23 @@
+<div>
+    {% extends "Oncoliq/laboratorio/laboratorio.html" %}
+    {% load static %}
+
+    {% block getLaboratorio %}
+        <p>Consultar Operario</p>
+        <form action="/Oncoliq/buscarLaboratorio/" method="GET">
+            <input placeholder="Operario" type="text" name="operario" id="operario">
+            <input type="submit" value="Buscar">
+        </form>
+
+        {% if operario %}
+            {% for op in operario %}
+                <li> {{op.laboratorio}} </li>
+                <li> {{op.operario}} </li>
+                <li> {{op.email}} </li>
+                <li> {{op.equipo}} </li>
+                <li> {{op.fecha}} </li>
+                <li> {{op.resultado}} </li>
+            {% endfor %}
+        {% endif %}
+    {% endblock %} 
+</div>

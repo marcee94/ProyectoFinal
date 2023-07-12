@@ -1,0 +1,38 @@
+<div>
+    {% extends "Oncoliq/inicio.html" %}
+    {% load static %}
+    
+        {% block contenidoQueCambia %}
+        <p>Laboratorios disponibles</p>
+        <table id="tableInfoLaboratorio" class="table table-bordered text-center">
+            <tr id="tituloTablaLaboratorio">
+                <th>Laboratorio</th>
+                <th>Operario</th>
+                <th>Email</th>
+                <th>Equipo</th>
+                <th>Fecha</th>
+                <th>Resultado</th>
+            </tr>
+                {% for laboratorio in Laboratorio %}
+                    <tr>
+                        <td>{{laboratorio.laboratorio}}</td>
+                        <td>{{laboratorio.operario}}</td>
+                        <td>{{laboratorio.email}}</td>
+                        <td>{{laboratorio.equipo}}</td>
+                        <td>{{laboratorio.fecha}}</td>
+                        <td>{{laboratorio.resultado}}</td>
+                        <td><button class="btn btn-danger btnEliminar"><a href="{% url 'eliminarLaboratorio' laboratorio.laboratorio %}">X</a></button></td>
+                        <td><button class="btn btneditar"><a href="{% url 'editarLaboratorio' laboratorio.laboratorio %}">Editar</a></button><td>
+                    </tr>
+                {% endfor %}
+        </table>
+        <div class="formSetLaboratorio">
+            {% block setLaboratorio %}
+            {% endblock %}      
+        </div>
+        <div class="formGetLaboratorio">
+            {% block getLaboratorio %}
+            {% endblock %}      
+        </div>
+        {% endblock %}
+</div>

@@ -1,0 +1,22 @@
+<div>
+    {% extends "Oncoliq/medico/medico.html" %}
+    {% load static %}
+
+    {% block setMedico %}
+        <p>Crear Medico</p>
+        <form action="/Oncoliq/setMedico/"    method="POST">{% csrf_token %}
+            <!--table>
+                {{ miFormulario.as_table }}
+            </table-->
+            <input placeholder="Nombre" type = "text" name="nombre" required>
+            <input placeholder="Apellido" type = "text" name="apellido" required>
+            <input placeholder="Email" type = "email" name="email" required>
+            <input placeholder="Institucion" type = "text" name="institucion" required>
+            <input placeholder="Informe" type = "text" name="informe" required>
+            <input placeholder="Mamografia" type = "text" name="mamografia" required>
+
+            <input class="btn btn-primary" type = "submit" value="Enviar">
+         </form>
+         
+    {% endblock %} 
+</div>

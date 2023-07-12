@@ -1,0 +1,37 @@
+.btnEliminar a{
+    border-radius: 15px;
+    color: white;
+    text-decoration: none;
+}
+
+.containerForm{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-image: url("../assets/img/loginOncoliq.jpg");
+}
+
+.formLogin{
+    font-weight: bold;
+    background: transparent;
+    padding: 40px 20px 20px 20px;
+    border-radius: 5px;
+    width: 350px;
+    height: 400px;
+}
+
+.formLogin div{
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.inputLogin{
+    border-radius: 5px;
+    border: 1px solid rebeccapurple;
+    width: 90%;
+}

@@ -1,0 +1,23 @@
+<div>
+    {% extends "Oncoliq/medico/medico.html" %}
+    {% load static %}
+
+    {% block getMedico %}
+        <p>Consultar Medico</p>
+        <form action="/Oncoliq/buscarMedico/" method="GET">
+            <input placeholder="Email" type="email" name="email" id="email">
+            <input type="submit" value="Buscar">
+        </form>
+
+        {% if email %}
+            {% for em in email %}
+                <li> {{em.nombre}} </li>
+                <li> {{em.apellido}} </li>
+                <li> {{em.email}} </li>
+                <li> {{em.institucion}} </li>
+                <li> {{em.informe}} </li>
+                <li> {{em.mamografia}} </li>
+            {% endfor %}
+        {% endif %}
+    {% endblock %} 
+</div>

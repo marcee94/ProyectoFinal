@@ -1,0 +1,12 @@
+<div>
+    {% load static %}
+    
+    {% block setLaboratorio %}
+    <form action="/Oncoliq/setLaboratorio/{{laboratorio}}" method="POST"> {% csrf_token %}
+        <table>
+            {{ miFormulario.as_table }}
+        </table>
+        <input class="btn btn-primary" type = "submit" value="Enviar">
+    </form>
+    {% endblock %}
+</div>

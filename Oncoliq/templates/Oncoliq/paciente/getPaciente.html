@@ -1,0 +1,20 @@
+<div>
+    {% extends "Oncoliq/paciente/paciente.html" %}
+    {% load static %}
+
+    {% block getPaciente %}
+        <p>Consultar Paciente</p>
+        <form action="/Oncoliq/buscarPaciente/" method="GET">
+            <input placeholder="Email" type="email" name="email" id="email">
+            <input type="submit" value="Buscar">
+        </form>
+
+        {% if email %}
+            {% for mail in email %}
+                <li> {{mail.nombre}} </li>
+                <li> {{mail.apellido}} </li>
+                <li> {{mail.email}} </li>
+            {% endfor %}
+        {% endif %}
+    {% endblock %} 
+</div>

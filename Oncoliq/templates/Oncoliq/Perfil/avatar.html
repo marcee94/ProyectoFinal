@@ -1,0 +1,12 @@
+{% extends '../inicio.html' %}
+{% load static %}
+
+<h1>Avatar</h1>
+<h5>{{user.username}}</h5>
+
+<form method="POST" enctype="multipart/form-data"> {% csrf_token %}
+    <table>
+        {{ form.as_p }}
+    </table>
+    <input type="submit" value="Aceptar">
+</form>

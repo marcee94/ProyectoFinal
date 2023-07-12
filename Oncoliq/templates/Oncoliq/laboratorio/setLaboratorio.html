@@ -1,0 +1,22 @@
+<div>
+    {% extends "Oncoliq/laboratorio/laboratorio.html" %}
+    {% load static %}
+
+    {% block setLaboratorio %}
+        <p>Crear Laboratorio</p>
+        <form action="/Oncoliq/setLaboratorio/"    method="POST">{% csrf_token %}
+            <!--table>
+                {{ miFormulario.as_table }}
+            </table-->
+            <input placeholder="Laboratorio" type = "text" name="laboratorio" required>
+            <input placeholder="Operario" type = "text" name="operario" required>
+            <input placeholder="Email" type = "email" name="email" required>
+            <input placeholder="Equipo" type = "text" name="equipo" required>
+            <input placeholder="Fecha" type = "date" name="fecha" required>
+            <input placeholder="Resultado" type = "text" name="resultado" required>
+
+            <input class="btn btn-primary" type = "submit" value="Enviar">
+         </form>
+         
+    {% endblock %} 
+</div>

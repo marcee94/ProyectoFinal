@@ -1,0 +1,13 @@
+{% extends '../inicio.html' %}
+{% load static %}
+
+<h1>Editar Perfil</h1>
+<h6>{{user.username}}</h6>
+
+<form method="POST"> {% csrf_token %}
+    <table>
+        {{ form.as_table }}
+    </table>
+    <input type="submit" value="Editar perfil">
+</form>
+<a href="/Oncoliq/Perfil/changePassword">Cambiar contraseña</a>

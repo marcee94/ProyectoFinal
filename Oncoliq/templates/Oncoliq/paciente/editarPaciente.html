@@ -1,0 +1,12 @@
+<div>
+    {% load static %}
+    
+    {% block setPaciente %}
+    <form action="/Oncoliq/setPaciente/{{nombre}}" method="post"> {% csrf_token %}
+        <table>
+            {{ miFormulario.as_table }}
+        </table>
+        <input class="btn btn-primary" type = "submit" value="Enviar">
+    </form>
+    {% endblock %}
+</div>
