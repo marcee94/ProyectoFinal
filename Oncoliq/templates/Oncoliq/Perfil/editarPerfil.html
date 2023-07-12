@@ -1,8 +1,5 @@
-{% extends '../inicio.html' %}
-{% load static %}
-
-<h1>Editar Perfil</h1>
-<h6>{{user.username}}</h6>
+<h2>Editar Perfil</h2>
+<h3>{{user.username}}</h3>
 
 <form method="POST"> {% csrf_token %}
     <table>

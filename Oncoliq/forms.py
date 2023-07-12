@@ -37,7 +37,7 @@ class UserEditForm(UserChangeForm):
 class ChangePasswordForm(PasswordChangeForm):
     old_password = forms.CharField(label ="", widget= forms.PasswordInput(attrs={"placeholder":"Old password"}))
     new_password1 = forms.CharField(label ="", widget= forms.PasswordInput(attrs={"placeholder":"New password"}))
-    newpassword2 = forms.CharField(label ="", widget= forms.PasswordInput(attrs={"placeholder":"Confirmation new password"}))
+    new_password2 = forms.CharField(label ="", widget= forms.PasswordInput(attrs={"placeholder":"Confirm new password"}))
 
     class Meta:
         model = User

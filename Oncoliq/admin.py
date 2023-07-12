@@ -6,3 +6,4 @@ from .models import *
 admin.site.register(Laboratorio)
 admin.site.register(Medico)
 admin.site.register(Paciente)
+admin.site.register(Avatar)

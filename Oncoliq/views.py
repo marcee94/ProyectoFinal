@@ -11,7 +11,8 @@ from Oncoliq.forms import *
 
 @login_required
 def inicio(request):
-    return render (request,"Oncoliq/inicio.html")
+    avatar = getAvatar(request)
+    return render (request,"Oncoliq/inicio.html", {"avatar":avatar})
 
 @login_required
 def laboratorio(request):
@@ -258,12 +259,14 @@ def changePassword(request):
             if request.POST['new_password1'] == request.POST['new_password2']:
                 user = form.save()
                 update_session_auth_hash(request, user)
-            return HttpResponse("Las contraseñas no coinciden")
-        return render(request, 'Oncoliq/inicio.html')
+                return redirect('perfil')
+            else:
+                error_message = "Las contraseñas no coinciden"
+                form.add_error('new_password2', error_message)
     else:
         form = ChangePasswordForm(user = usuario)
-        return render(request, 'Oncoliq/Perfil/changePassword.html', {"form":form})
-    
+    return render(request, 'Oncoliq/Perfil/changePassword.html', {"form":form})
+
 @login_required
 def editAvatar(request):
     if request.method == 'POST':
@@ -286,7 +289,7 @@ def editAvatar(request):
             form = avatarForm()
         except:
             form = avatarForm()
-    return render(request, 'agregarAvatar.html', {'form':form})
+    return render(request, 'Oncoliq/perfil/avatar.html', {'form':form})
 
 def getAvatar(request):
     avatar = Avatar.objects.filter(user = request.user.id)
