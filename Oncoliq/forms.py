@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserChangeForm, PasswordChangeForm
 from django.contrib.auth.models import User
+from .models import Comentario
 
 class formSetLaboratorio (forms.Form):
     laboratorio = forms.CharField(max_length=30)
@@ -46,3 +47,12 @@ class ChangePasswordForm(PasswordChangeForm):
 
 class avatarForm(forms.Form):
     avatar = forms.ImageField()
+
+class FormularioComentario(forms.ModelForm):
+    class Meta:
+        model = Comentario
+        fields = ('nombre', 'mensaje')
+        widgets = {
+            'nombre': forms.TextInput(attrs={'class': 'form-control'}),
+            'mensaje' : forms.Textarea(attrs={'class': 'form-control'}),
+        }

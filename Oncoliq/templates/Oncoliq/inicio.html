@@ -25,7 +25,10 @@
                             <li class="nav-item"><a class="nav-link" href="{% url 'Paciente' %}">Paciente</a></li>
                             <li class="nav-item"><a class="nav-link" href=""><img src="{{avatar}}" width="40px" alt="perfil"></a></li>
                             <li class="nav-item"><a class="nav-link" href="{% url 'perfil' %}">{{user.username}}</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'comentario' %}">Comentario</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'mostrarComentarios' %}">Blog</a></li>
                             <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Logout</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'acercaDeMi' %}">Acerca de mi</a></li>
                         </ul>
                     </div>
                 </div>

@@ -1,10 +1,11 @@
 from django.urls import path
 from Oncoliq.views import *
 from django.contrib.auth.views import LogoutView
+from . import views
 
 urlpatterns = [
     path('', loginWeb),
-    path('inicio/', inicio),
+    path('inicio/', inicio, name="inicio"),
     path('laboratorio/', laboratorio, name="Laboratorio"),
     path('medico/', medico, name="Medico"),
     path('paciente/', paciente, name="Paciente"),
@@ -30,4 +31,7 @@ urlpatterns = [
     path('Perfil/editarPerfil/', editarPerfil, name="editarPerfil"),
     path('Perfil/changePassword/', changePassword, name="changePassword"),
     path('Perfil/changeAvatar/', editAvatar, name="editAvatar"),
+    path('comentario/', ComentarioPagina.as_view(), name="comentario"),
+    path('comentarios/', mostrarComentarios, name='mostrarComentarios'),
+    path('acercaDeMi/', views.about, name='acercaDeMi'),
 ]

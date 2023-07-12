@@ -1,0 +1,14 @@
+{% extends 'Oncoliq/inicio.html' %}
+
+{% block contenidoQueCambia %}
+  <h1>Comentarios</h1>
+  {% if comentarios %}
+    <ul>
+      {% for comentario in comentarios %}
+        <li>{{ comentario.nombre }}: {{ comentario.mensaje }}</li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No hay comentarios guardados.</p>
+  {% endif %}
+{% endblock %}

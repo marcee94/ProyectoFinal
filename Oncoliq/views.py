@@ -4,6 +4,9 @@ from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login, logout, authenticate, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic.edit import CreateView
+from django.urls import reverse_lazy
 
 # Create your views here.
 from Oncoliq.models import *
@@ -298,3 +301,21 @@ def getAvatar(request):
     except:
         avatar = None
     return avatar
+
+class ComentarioPagina(LoginRequiredMixin, CreateView):
+    model = Comentario
+    form_class = FormularioComentario
+    template_name = 'Oncoliq/comentario.html'
+    success_url = reverse_lazy('inicio')
+
+    def form_valid(self, form):
+        if 'pk' in self.kwargs:
+            form.instance.comentario_id = self.kwargs['pk']
+        return super(ComentarioPagina, self).form_valid(form)
+    
+def mostrarComentarios(request):
+    comentarios = Comentario.objects.all()
+    return render(request, 'Oncoliq/mostrarComentarios.html', {'comentarios': comentarios})
+
+def about(request):
+    return render(request, 'Oncoliq/acercaDeMi.html', {})
