@@ -20,3 +20,7 @@ Cambiar la contraseña de Usuario
 Cerrar Sesión
 
 Login en caso de haber cerrado sesión
+
+Video demostrativo del funcionamiento del proyecto en el siguiente link:
+
+https://youtu.be/He88QE24FKs
