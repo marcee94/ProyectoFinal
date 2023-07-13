@@ -8,9 +8,15 @@ A fin de navegar por las secciones de la página web, el usuario será requerido
 Los usuarios pueden realizar las siguientes accciones:
 
 Visualizar laboratorios, medicos y pacientes creados en la base de datos en sus respectivas secciones
+
 Dejar comentarios
+
 Ver comentarios propios y de otras personas
+
 Editar el perfil de Usuario
+
 Cambiar la contraseña de Usuario
+
 Cerrar Sesión
+
 Login en caso de haber cerrado sesión
