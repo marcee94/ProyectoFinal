@@ -15,8 +15,8 @@
                         <td>{{paciente.nombre}}</td>
                         <td>{{paciente.apellido}}</td>
                         <td>{{paciente.email}}</td>
-                        <td><button class="btn btn-danger btnEliminar"><a href="{% url 'eliminarPaciente' paciente.nombre %}">X</a></button></td>
-                        <td><button class="btn btneditar"><a href="{% url 'editarPaciente' paciente.nombre %}">Editar</a></button><td>
+                        <td><button class="btn btn-danger btnEliminar"><a href="{% url 'eliminarPaciente' paciente.id %}">X</a></button></td>
+                        <td><button class="btn btneditar"><a href="{% url 'editarPaciente' paciente.id %}">Editar</a></button><td>
                     </tr>
                 {% endfor %}
         </table>

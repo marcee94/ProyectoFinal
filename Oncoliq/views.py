@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login, logout, authenticate, update_session_auth_hash
@@ -123,94 +123,93 @@ def buscarPaciente(request):
     return HttpResponse(respuesta)
 
 @login_required
-def eliminarLaboratorio(request, nombre_laboratorio):
-    laboratorio = Laboratorio.objects.get(laboratorio=nombre_laboratorio)
-    laboratorio.delete()
-    miFormulario = formSetLaboratorio()
-    laboratorios = Laboratorio.objects.all()
-    return render(request,"Oncoliq/laboratorio/laboratorio.html",{"miFormulario":miFormulario,"laboratorios":laboratorios})
+def eliminarLaboratorio(request, pk):
+    laboratorio = get_object_or_404(Laboratorio, pk=pk)
 
-@login_required
-def editarLaboratorio(request, nombre_laboratorio):
-    laboratorio = Laboratorio.objects.get(laboratorio= nombre_laboratorio)
     if request.method == 'POST':
-        
-        miFormulario = formSetLaboratorio(request.POST)
-        if miFormulario.is_valid:
-            data = miFormulario.cleaned_data
+        laboratorio.delete()
+        return redirect('Laboratorio')
 
-            laboratorio.laboratorio = data['laboratorio']
-            laboratorio.operario = data['operario']
-            laboratorio.email = data['email']
-            laboratorio.equipo = data['equipo']
-            laboratorio.fecha = data['fecha']
-            laboratorio.resultado = data['resultado']
-            laboratorio.save()
-            miFormulario = formSetLaboratorio()
-            laboratorios = Laboratorio.objects.all()
-            return render(request,"Oncoliq/setLaboratorio.html",{"miFormulario":miFormulario,"laboratorios":laboratorios})
-    else:
-        miFormulario = formSetLaboratorio(initial={'laboratorio': laboratorio.laboratorio, 'operario': laboratorio.operario, 'email': laboratorio.email, 'equipo': laboratorio.equipo, 'fecha': laboratorio.fecha, 'resultado': laboratorio.resultado})
-    return render(request,"Oncoliq/laboratorio/editarLaboratorio.html",{"miFormulario":miFormulario})
+    return render(request, 'Oncoliq/laboratorio/confirmarEliminarLaboratorio.html', {'laboratorio': laboratorio})
 
 @login_required
-def eliminarMedico(request, nombre_medico):
-    medico = Medico.objects.get(nombre=nombre_medico)
-    medico.delete()
-    miFormulario = formSetMedico()
-    medicos = Medico.objects.all()
-    return render(request,"Oncoliq/medico/medico.html",{"miFormulario":miFormulario,"medicos":medicos})
+def editarLaboratorio(request, pk):
+    laboratorio = get_object_or_404(Laboratorio, pk=pk)
 
-@login_required
-def editarMedico(request, nombre_medico):
-    medico = Medico.objects.get(nombre= nombre_medico)
     if request.method == 'POST':
-        
-        miFormulario = formSetMedico(request.POST)
-        if miFormulario.is_valid:
-            data = miFormulario.cleaned_data
-
-            medico.nombre = data['nombre']
-            medico.apellido = data['apellido']
-            medico.email = data['email']
-            medico.institucion = data['institucion']
-            medico.informe = data['informe']
-            medico.mamografia = data['mamografia']
-            medico.save()
-            miFormulario = formSetMedico()
-            medicos = Medico.objects.all()
-            return render(request,"Oncoliq/setMedico.html",{"miFormulario":miFormulario,"medicos":medicos})
+        # Si el formulario se ha enviado con datos, procesarlos.
+        form = FormularioLaboratorio(request.POST, instance=laboratorio)
+        if form.is_valid():
+            # Guardar los cambios en el laboratorio
+            form.save()
+            # Redirigir a la página de detalles del laboratorio actualizado
+            return redirect('detalleLaboratorio', pk=pk)
     else:
-        miFormulario = formSetMedico(initial={'nombre': medico.nombre, 'apellido': medico.apellido, 'email': medico.email, 'institucion': medico.institucion, 'informe': medico.informe, 'mamografia': medico.mamografia})
-    return render(request,"Oncoliq/medico/editarMedico.html",{"miFormulario":miFormulario})
+        # Si es una solicitud GET, mostrar el formulario para editar el laboratorio
+        form = FormularioLaboratorio(instance=laboratorio)
+
+    # Renderizar el template con el formulario
+    return render(request, 'Oncoliq/laboratorio/editarLaboratorio.html', {'form': form})
+
+def detalleLaboratorio(request, pk):
+    laboratorio = get_object_or_404(Laboratorio, pk=pk)
+    return render(request, 'Oncoliq/laboratorio/detalleLaboratorio.html', {'laboratorio': laboratorio})
 
 @login_required
-def eliminarPaciente(request, nombre_paciente):
-    paciente = Paciente.objects.get(nombre=nombre_paciente)
-    paciente.delete()
-    miFormulario = formSetPaciente()
-    pacientes = Paciente.objects.all()
-    return render(request,"Oncoliq/paciente/paciente.html",{"miFormulario":miFormulario,"pacientes":pacientes})
+def eliminarMedico(request, pk):
+    medico = get_object_or_404(Medico, pk=pk)
 
-@login_required
-def editarPaciente(request, nombre_paciente):
-    paciente = Paciente.objects.get(nombre= nombre_paciente)
     if request.method == 'POST':
-        
-        miFormulario = formSetPaciente(request.POST)
-        if miFormulario.is_valid:
-            data = miFormulario.cleaned_data
+        medico.delete()
+        return redirect('Medico')
 
-            paciente.nombre = data['nombre']
-            paciente.apellido = data['apellido']
-            paciente.email = data['email']
-            paciente.save()
-            miFormulario = formSetPaciente()
-            pacientes = Paciente.objects.all()
-            return render(request,"Oncoliq/setPaciente.html",{"miFormulario":miFormulario,"pacientes":pacientes})
+    return render(request, 'Oncoliq/medico/confirmarEliminarMedico.html', {'medico': medico})
+
+@login_required
+def editarMedico(request, pk):
+    medico = get_object_or_404(Medico, pk=pk)
+
+    if request.method == 'POST':
+        form = FormularioMedico(request.POST, instance=medico)
+        if form.is_valid():
+            form.save()
+            return redirect('detalleMedico', pk=pk)
     else:
-        miFormulario = formSetPaciente(initial={'nombre': paciente.nombre, 'apellido': paciente.apellido, 'email': paciente.email})
-    return render(request,"Oncoliq/paciente/editarPaciente.html",{"miFormulario":miFormulario})
+        form = FormularioMedico(instance=medico)
+
+    return render(request, 'Oncoliq/medico/editarMedico.html', {'form': form})
+
+def detalleMedico(request, pk):
+    medico = get_object_or_404(Medico, pk=pk)
+    return render(request, 'Oncoliq/medico/detalleMedico.html', {'medico': medico})
+
+@login_required
+def eliminarPaciente(request, pk):
+    paciente = get_object_or_404(Paciente, pk=pk)
+
+    if request.method == 'POST':
+        paciente.delete()
+        return redirect('Paciente')
+
+    return render(request, 'Oncoliq/paciente/confirmarEliminarPaciente.html', {'paciente': paciente})
+
+@login_required
+def editarPaciente(request, pk):
+    paciente = get_object_or_404(Paciente, pk=pk)
+
+    if request.method == 'POST':
+        form = FormularioPaciente(request.POST, instance=paciente)
+        if form.is_valid():
+            form.save()
+            return redirect('detallePaciente', pk=pk)
+    else:
+        form = FormularioPaciente(instance=paciente)
+
+    return render(request, 'Oncoliq/paciente/editarPaciente.html', {'form': form})
+
+def detallePaciente(request, pk):
+    paciente = get_object_or_404(Paciente, pk=pk)
+    return render(request, 'Oncoliq/paciente/detallePaciente.html', {'paciente': paciente})
 
 def loginWeb(request):
     if request.method == "POST":

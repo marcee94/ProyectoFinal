@@ -21,8 +21,8 @@
                         <td>{{laboratorio.equipo}}</td>
                         <td>{{laboratorio.fecha}}</td>
                         <td>{{laboratorio.resultado}}</td>
-                        <td><button class="btn btn-danger btnEliminar"><a href="{% url 'eliminarLaboratorio' laboratorio.laboratorio %}">X</a></button></td>
-                        <td><button class="btn btneditar"><a href="{% url 'editarLaboratorio' laboratorio.laboratorio %}">Editar</a></button><td>
+                        <td><button class="btn btn-danger btnEliminar"><a href="{% url 'eliminarLaboratorio' laboratorio.id %}">X</a></button></td>
+                        <td><button class="btn btneditar"><a href="{% url 'editarLaboratorio' laboratorio.id %}">Editar</a></button><td>
                     </tr>
                 {% endfor %}
         </table>

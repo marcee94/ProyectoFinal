@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserChangeForm, PasswordChangeForm
 from django.contrib.auth.models import User
-from .models import Comentario
+from .models import *
 
 class formSetLaboratorio (forms.Form):
     laboratorio = forms.CharField(max_length=30)
@@ -11,6 +11,11 @@ class formSetLaboratorio (forms.Form):
     fecha = forms.DateField()
     resultado = forms.CharField(max_length=30)
 
+class FormularioLaboratorio(forms.ModelForm):
+    class Meta:
+        model = Laboratorio
+        fields = '__all__'
+
 class formSetMedico (forms.Form):
     nombre = forms.CharField(max_length=30)
     apellido = forms.CharField(max_length=30)
@@ -19,10 +24,20 @@ class formSetMedico (forms.Form):
     informe = forms.CharField(max_length=200)
     mamografia = forms.CharField(max_length=30)
 
+class FormularioMedico(forms.ModelForm):
+    class Meta:
+        model = Medico
+        fields = '__all__'
+
 class formSetPaciente(forms.Form):
     nombre = forms.CharField(max_length=30)
     apellido = forms.CharField(max_length=30)
     email = forms.EmailField()
+
+class FormularioPaciente(forms.ModelForm):
+    class Meta:
+        model = Paciente
+        fields = '__all__'
 
 class UserEditForm(UserChangeForm):
     username = forms.CharField(widget= forms.TextInput(attrs={"placeholder":"Username"}))

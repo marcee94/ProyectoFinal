@@ -21,8 +21,8 @@
                         <td>{{medico.institucion}}</td>
                         <td>{{medico.informe}}</td>
                         <td>{{medico.mamografia}}</td>
-                        <td><button class="btn btn-danger btnEliminar"><a href="{% url 'eliminarMedico' medico.nombre %}">X</a></button></td>
-                        <td><button class="btn btneditar"><a href="{% url 'editarMedico' medico.nombre %}">Editar</a></button><td>
+                        <td><button class="btn btn-danger btnEliminar"><a href="{% url 'eliminarMedico' medico.id %}">X</a></button></td>
+                        <td><button class="btn btneditar"><a href="{% url 'editarMedico' medico.id %}">Editar</a></button><td>
                     </tr>
                 {% endfor %}
         </table>
