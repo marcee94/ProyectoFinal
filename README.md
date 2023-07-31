@@ -23,4 +23,4 @@ Login en caso de haber cerrado sesión
 
 Video demostrativo del funcionamiento del proyecto en el siguiente link:
 
-https://youtu.be/He88QE24FKs
+https://www.youtube.com/watch?v=nhm6D6s0760&ab_channel=MarceloAlcalde
